@@ -34,7 +34,7 @@ export default function About() {
               <div className="relative glass-card rounded-3xl p-8 text-center">
                 {/* Avatar Photo */}
                 <div className="w-32 h-32 mx-auto mb-6 rounded-2xl overflow-hidden shadow-xl shadow-primary-500/20">
-                  <img src="/images/profile.png" alt={personalInfo.name} className="w-full h-full object-cover" />
+                  <img src="/images/profile2.png" alt={personalInfo.name} className="w-full h-full object-cover" />
                 </div>
 
                 <h3 className="text-xl font-display font-bold text-white mb-1">
