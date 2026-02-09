@@ -67,13 +67,11 @@ export default function Footer() {
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-dark-500">
           <p className="flex items-center gap-1.5">
-            © {new Date().getFullYear()} Tajul Islam Tarek. Built with
-            <FaHeart className="text-red-400 text-xs" /> and
-            <FaCode className="text-primary-400 text-xs" />
+            © {new Date().getFullYear()} Tajul Islam Tarek. 
           </p>
-          <p className="font-mono text-xs text-dark-600">
+          {/* <p className="font-mono text-xs text-dark-600">
             React • Tailwind CSS • Framer Motion
-          </p>
+          </p> */}
         </div>
       </div>
     </footer>

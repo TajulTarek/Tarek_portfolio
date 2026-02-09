@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import {
   FaEnvelope,
   FaPhone,
@@ -44,6 +45,7 @@ const socialLinks = [
 ];
 
 export default function Contact() {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,6 +53,8 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -58,15 +62,39 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Build mailto link as a simple fallback
-    const mailtoLink = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
-      formData.subject || "Portfolio Contact"
-    )}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
-    )}`;
-    window.open(mailtoLink, "_blank");
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setSending(true);
+    setError(false);
+
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        // Send auto-reply copy to the sender
+        emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID,
+          {
+            to_email: formData.email,
+            to_name: formData.name,
+            subject: formData.subject || "Portfolio Contact",
+            message: formData.message,
+          },
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        );
+        setSubmitted(true);
+        setSending(false);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setSubmitted(false), 4000);
+      })
+      .catch(() => {
+        setSending(false);
+        setError(true);
+        setTimeout(() => setError(false), 4000);
+      });
   };
 
   return (
@@ -167,6 +195,7 @@ export default function Contact() {
             className="lg:col-span-3"
           >
             <form
+              ref={formRef}
               onSubmit={handleSubmit}
               className="glass-card rounded-2xl p-8 space-y-5"
             >
@@ -234,10 +263,12 @@ export default function Contact() {
                 type="submit"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                disabled={submitted}
+                disabled={submitted || sending}
                 className={`w-full py-3.5 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer ${
                   submitted
                     ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                    : error
+                    ? "bg-red-500/20 text-red-400 border border-red-500/30"
                     : "bg-linear-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40"
                 }`}
               >
@@ -245,6 +276,12 @@ export default function Contact() {
                   <>
                     <span>✓</span> Message Sent!
                   </>
+                ) : error ? (
+                  <>
+                    <span>✕</span> Failed to send. Try again.
+                  </>
+                ) : sending ? (
+                  <>Sending...</>
                 ) : (
                   <>
                     <FaPaperPlane size={14} />

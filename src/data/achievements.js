@@ -52,7 +52,7 @@ export const achievements = [
     event: "DU AI Challenge 2025",
     detail: "University of Dhaka",
     type: "ai",
-    icon: "🤖",
+    icon: "",
     color: "from-cyan-400 to-blue-500",
     images: [
       { src: "/images/achievements/du-ai-2025.jpg", label: "Team Photo" },
@@ -64,7 +64,7 @@ export const achievements = [
     event: "CodeCrafters DevSprint 2024",
     detail: "Inter-university competition by BUET — Project: Procollab",
     type: "hackathon",
-    icon: "💻",
+    icon: "",
     color: "from-orange-400 to-red-500",
     images: [
       { src: "/images/achievements/codecrafters-2024.jpg", label: "Team Photo" },
@@ -76,7 +76,7 @@ export const achievements = [
     event: "Hack The AI Competition 2025",
     detail: "",
     type: "ai",
-    icon: "🧠",
+    icon: "",
     color: "from-violet-400 to-purple-500",
     images: [
       { src: "/images/achievements/hack-ai-2025.jpg", label: "Finalist" },
@@ -88,7 +88,7 @@ export const achievements = [
     event: "VisionX: AI-powered Project Showcasing 2025",
     detail: "",
     type: "ai",
-    icon: "👁️",
+    icon: "",
     color: "from-blue-400 to-indigo-500",
     images: [
       { src: "/images/achievements/visionx-2025.jpg", label: "Finalist" },

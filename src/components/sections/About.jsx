@@ -32,9 +32,9 @@ export default function About() {
               
               {/* Main Card */}
               <div className="relative glass-card rounded-3xl p-8 text-center">
-                {/* Avatar Initials */}
-                <div className="w-32 h-32 mx-auto mb-6 rounded-2xl bg-linear-to-br from-primary-500 to-accent-500 flex items-center justify-center shadow-xl shadow-primary-500/20">
-                  <span className="text-5xl font-display font-bold text-white">TT</span>
+                {/* Avatar Photo */}
+                <div className="w-32 h-32 mx-auto mb-6 rounded-2xl overflow-hidden shadow-xl shadow-primary-500/20">
+                  <img src="/images/profile.png" alt={personalInfo.name} className="w-full h-full object-cover" />
                 </div>
 
                 <h3 className="text-xl font-display font-bold text-white mb-1">
