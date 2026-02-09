@@ -111,9 +111,7 @@ export default function Hero() {
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-4 tracking-tight"
         >
           <span className="text-white">I'm </span>
-          <span className="text-gradient">{personalInfo.firstName}</span>
-          <br className="sm:hidden" />{" "}
-          <span className="text-white">{personalInfo.lastName}</span>
+          <span className="text-gradient">{personalInfo.name}</span>
         </motion.h1>
 
         {/* Typing Role */}
